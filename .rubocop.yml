@@ -1,0 +1,27 @@
+AllCops:
+  Exclude:
+    - Rakefile
+    - bin/*
+    - vendor/**/*
+  TargetRubyVersion: 2.3
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/useragent_api/**/*
+
+Metrics/LineLength:
+  Max: 128
+  Exclude:
+    - spec/useragent_api/**/*
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FormatStringToken:
+  EnforcedStyle: unannotated
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
