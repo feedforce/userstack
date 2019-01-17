@@ -4,4 +4,9 @@ language: ruby
 cache: bundler
 rvm:
   - 2.5.1
+  - 2.4.4
+  - 2.3.7
 before_install: gem install bundler -v 2.0.1
+before_script:
+  - ./bin/validate-target-ruby-version.rb
+  - bundle exec rubocop
