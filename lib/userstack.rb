@@ -1,6 +1,7 @@
-require "userstack/version"
+require 'userstack/version'
 
+# :nodoc:
 module Userstack
-  class Error < StandardError; end
-  # Your code goes here...
 end
+
+require 'userstack/client'
