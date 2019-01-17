@@ -7,13 +7,13 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
-    - spec/useragent_api/**/*
+    - spec/userstack/**/*
     - userstack.gemspec
 
 Metrics/LineLength:
   Max: 128
   Exclude:
-    - spec/useragent_api/**/*
+    - spec/userstack/**/*
 
 Style/FormatString:
   EnforcedStyle: percent
