@@ -8,6 +8,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - spec/useragent_api/**/*
+    - userstack.gemspec
 
 Metrics/LineLength:
   Max: 128
