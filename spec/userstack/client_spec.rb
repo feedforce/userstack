@@ -17,11 +17,11 @@ describe Userstack::Client do
 
   describe '#parse' do
     shared_examples_for 'Userstack' do
-      let(:request_uri) { "#{stub_uri_scheme}://api.userstack.com/detect?access_key=#{access_key}&ua=#{CGI.escape(useragent)}" }
+      let(:request_uri) { "#{stub_request_uri_scheme}://api.userstack.com/detect?access_key=#{access_key}&ua=#{CGI.escape(useragent)}" }
 
       before do
         stub_request(:get, request_uri).to_return(
-          status: stub_status, body: stub_body
+          status: stub_response_status, body: stub_response_body
         )
       end
 
@@ -34,9 +34,9 @@ describe Userstack::Client do
 
     context 'given registered Access key' do
       let(:client) { Userstack::Client.new(access_key) }
-      let(:stub_uri_scheme) { 'https' }
-      let(:stub_status) { 200 }
-      let(:stub_body) { expectation.to_json }
+      let(:stub_request_uri_scheme) { 'https' }
+      let(:stub_response_status) { 200 }
+      let(:stub_response_body) { expectation.to_json }
       let(:expectation) do
         {
           'data' => {
@@ -57,9 +57,9 @@ describe Userstack::Client do
     context 'given unregistered Access key' do
       let(:client) { Userstack::Client.new(access_key) }
       let(:access_key) { 'unregistered' }
-      let(:stub_uri_scheme) { 'https' }
-      let(:stub_status) { 400 }
-      let(:stub_body) { expectation.to_json }
+      let(:stub_request_uri_scheme) { 'https' }
+      let(:stub_response_status) { 400 }
+      let(:stub_response_body) { expectation.to_json }
       let(:expectation) do
         {
           'error' => {
@@ -74,9 +74,9 @@ describe Userstack::Client do
 
     context 'given unclassified Useragent' do
       let(:client) { Userstack::Client.new(access_key) }
-      let(:stub_uri_scheme) { 'https' }
-      let(:stub_status) { 200 }
-      let(:stub_body) { expectation.to_json }
+      let(:stub_request_uri_scheme) { 'https' }
+      let(:stub_response_status) { 200 }
+      let(:stub_response_body) { expectation.to_json }
       let(:expectation) do
         {
           'error' => {
@@ -92,9 +92,9 @@ describe Userstack::Client do
 
     context 'when a server returns a broken response' do
       let(:client) { Userstack::Client.new(access_key) }
-      let(:stub_uri_scheme) { 'https' }
-      let(:stub_status) { 500 }
-      let(:stub_body) { '<b>Fatal error</b>' }
+      let(:stub_request_uri_scheme) { 'https' }
+      let(:stub_response_status) { 500 }
+      let(:stub_response_body) { '<b>Fatal error</b>' }
       let(:expectation) { {} }
 
       it_behaves_like 'Userstack'
@@ -102,9 +102,9 @@ describe Userstack::Client do
 
     context 'use http request' do
       let(:client) { Userstack::Client.new(access_key, use_ssl: false) }
-      let(:stub_uri_scheme) { 'http' }
-      let(:stub_status) { 200 }
-      let(:stub_body) { expectation.to_json }
+      let(:stub_request_uri_scheme) { 'http' }
+      let(:stub_response_status) { 200 }
+      let(:stub_response_body) { expectation.to_json }
       let(:expectation) do
         {
           'data' => {
