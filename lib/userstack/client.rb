@@ -10,15 +10,16 @@ module Userstack
     # @param access_key [String] Userstack Access key
     # @raise [ArgumentError] when `access_key` is invalid
     # @see https://userstack.com/documentation
-    def initialize(access_key)
+    def initialize(access_key, use_ssl: true)
       raise ArgumentError, 'Invalid Access key' if access_key.empty?
 
       @access_key = access_key.freeze
+      @use_ssl = use_ssl
       freeze
     end
 
     # @return [String] Returns the Access key
-    attr_reader :access_key
+    attr_reader :access_key, :use_ssl
 
     # Parse an useragent using Userstack
     #
@@ -30,8 +31,8 @@ module Userstack
       parse_as_json(response.body)
     end
 
-    USERSTACK_API_FQDN = URI('https://api.userstack.com/')
-    private_constant :USERSTACK_API_FQDN
+    USERSTACK_API_DOMAIN = 'api.userstack.com'
+    private_constant :USERSTACK_API_DOMAIN
 
     USER_AGENT = 'Userstack gem/%s' % VERSION
     private_constant :USER_AGENT
@@ -46,7 +47,9 @@ module Userstack
     end
 
     def request_uri(useragent)
-      USERSTACK_API_FQDN.dup.tap do |uri|
+      scheme = use_ssl ? 'https' : 'http'
+      fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
+      fqdn.dup.tap do |uri|
         uri.path = '/detect'
         uri.query = {
           access_key: access_key,
