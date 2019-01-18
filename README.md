@@ -38,6 +38,15 @@ Or install it yourself as:
     result = client.parse('an useragent')
     ```
 
+### Use http
+
+If you are Free plan user, you have to use `http` scheme.
+
+```ruby
+client = Userstack::Client.new(ACCESS_KEY, use_ssl: false)
+result = client.parse('an useragent')
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
