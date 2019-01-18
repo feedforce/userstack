@@ -10,16 +10,17 @@ module Userstack
     # @param access_key [String] Userstack Access key
     # @raise [ArgumentError] when `access_key` is invalid
     # @see https://userstack.com/documentation
-    def initialize(access_key, use_ssl: true)
+    def initialize(access_key, use_ssl: true, legacy: false)
       raise ArgumentError, 'Invalid Access key' if access_key.empty?
 
       @access_key = access_key.freeze
       @use_ssl = use_ssl
+      @legacy = legacy
       freeze
     end
 
     # @return [String] Returns the Access key
-    attr_reader :access_key, :use_ssl
+    attr_reader :access_key, :use_ssl, :legacy
 
     # Parse an useragent using Userstack
     #
@@ -51,11 +52,17 @@ module Userstack
       fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
       fqdn.dup.tap do |uri|
         uri.path = '/detect'
-        uri.query = {
-          access_key: access_key,
-          ua: CGI.escape(useragent)
-        }.map { |k, v| "#{k}=#{v}" }.join('&')
+        uri.query = request_query(useragent)
       end
+    end
+
+    def request_query(useragent)
+      query = {
+        access_key: access_key,
+        ua: CGI.escape(useragent)
+      }
+      query[:legacy] = 1 if legacy
+      query.map { |k, v| "#{k}=#{v}" }.join('&')
     end
 
     def parse_as_json(json_text)
