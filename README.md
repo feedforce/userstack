@@ -1,8 +1,12 @@
 # Userstack
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/userstack`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Travis Status](https://img.shields.io/travis/feedforce/userstack.svg?style=flat-square)][travisci]
+[![License](https://img.shields.io/github/license/feedforce/userstack.svg?style=flat-square)][license]
 
-TODO: Delete this and the text above, and describe your gem
+[travisci]: https://travis-ci.org/feedforce/userstack
+[license]: https://github.com/feedforce/userstack/blob/master/LICENSE.txt
+
+This gem provides an access to [Userstack](https://userstack.com://userstack.com).
 
 ## Installation
 
@@ -22,7 +26,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Instantiate an instance of {Userstack::Client} with a valid Access key.
+
+    ```ruby
+    client = Userstack::Client.new(ACCESS_KEY)
+    ```
+
+2. Parse an useragent.
+
+    ```ruby
+    result = client.parse('an useragent')
+    ```
 
 ## Development
 
