@@ -15,7 +15,7 @@ module Userstack
     # @raise [ArgumentError] when `access_key` is invalid
     # @see https://userstack.com/documentation
     def initialize(access_key, use_ssl: true, legacy: false)
-      raise ArgumentError, 'Invalid Access key' if access_key.empty?
+      raise ArgumentError, 'Invalid Access key' if access_key.nil? || access_key.empty?
 
       @access_key = access_key.freeze
       @use_ssl = use_ssl

@@ -13,6 +13,11 @@ describe Userstack::Client do
       let(:access_key) { '' }
       it { expect { client }.to raise_error ArgumentError }
     end
+
+    context 'Access key is nil' do
+      let(:access_key) { nil }
+      it { expect { client }.to raise_error ArgumentError }
+    end
   end
 
   describe '#parse' do
