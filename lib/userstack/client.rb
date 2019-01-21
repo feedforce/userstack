@@ -8,8 +8,8 @@ module Userstack
   # A class which wraps calls to Userstack API
   class Client
     # @param access_key [String] Userstack Access key
-    # @param use_ssl [TrueClass, FalseClass] Use ssl or not
-    # @param legacy [TrueClass, FalseClass] Legacy response
+    # @param use_ssl [Boolean] Use ssl or not
+    # @param legacy [Boolean] Legacy response
     # @raise [ArgumentError] when `access_key` is invalid
     # @see https://userstack.com/documentation
     def initialize(access_key, use_ssl: true, legacy: false)
