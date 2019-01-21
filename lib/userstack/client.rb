@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
-require 'cgi'
 require 'json'
 require 'net/https'
 
 module Userstack
   # A class which wraps calls to Userstack API
   class Client
+    USER_AGENT = 'Userstack gem/%s' % VERSION
+    private_constant :USER_AGENT
+
     # @param access_key [String] Userstack Access key
     # @param use_ssl [Boolean] Use ssl or not
     # @param legacy [Boolean] Legacy response
@@ -21,11 +23,6 @@ module Userstack
       freeze
     end
 
-    USER_AGENT = 'Userstack gem/%s' % VERSION
-    private_constant :USER_AGENT
-
-    attr_reader :access_key, :use_ssl, :legacy
-
     # Parse an useragent using Userstack
     #
     # @param useragent [String] an useragent
@@ -37,6 +34,8 @@ module Userstack
     end
 
     private
+
+    attr_reader :access_key, :use_ssl, :legacy
 
     def request(useragent)
       uri = Userstack::UriBuilder.execute(access_key, useragent, use_ssl: use_ssl, legacy: legacy)

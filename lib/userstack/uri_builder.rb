@@ -1,36 +1,30 @@
 # frozen_string_literal: true
 
 require 'cgi'
-require 'json'
-require 'net/https'
 
 module Userstack
   # A class which builds uri of Userstack api
   class UriBuilder
-    # @param access_key [String] Userstack Access key
-    # @param useragent [String] useragent
-    # @param use_ssl [Boolean] Use ssl or not
-    # @param legacy [Boolean] Legacy response
-    # @raise [ArgumentError] when `access_key` is invalid
-    # @see https://userstack.com/documentation
-    def self.execute(access_key, useragent, use_ssl: true, legacy: false)
-      new(access_key, useragent, use_ssl: use_ssl, legacy: legacy).send(:execute)
-    end
-
     USERSTACK_API_DOMAIN = 'api.userstack.com'
     private_constant :USERSTACK_API_DOMAIN
 
     private_class_method :new
+
+    # @param access_key [String] Userstack Access key
+    # @param useragent [String] useragent
+    # @param use_ssl [Boolean] Use ssl or not
+    # @param legacy [Boolean] Legacy response
+    def self.execute(access_key, useragent, use_ssl: true, legacy: false)
+      new(access_key, useragent, use_ssl: use_ssl, legacy: legacy).send(:execute)
+    end
 
     private
 
     attr_reader :access_key, :useragent, :use_ssl, :legacy
 
     def initialize(access_key, useragent, use_ssl: true, legacy: false)
-      raise ArgumentError, 'Invalid Access key' if access_key.empty?
-
       @access_key = access_key.freeze
-      @useragent = useragent
+      @useragent = useragent.freeze
       @use_ssl = use_ssl
       @legacy = legacy
       freeze
