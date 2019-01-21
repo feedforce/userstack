@@ -14,6 +14,7 @@ module Userstack
     # @param useragent [String] useragent
     # @param use_ssl [Boolean] Use ssl or not
     # @param legacy [Boolean] Legacy response
+    # @return [URI::HTTP, URI::HTTPS]
     def self.execute(access_key, useragent, use_ssl: true, legacy: false)
       new(access_key, useragent, use_ssl: use_ssl, legacy: legacy).send(:execute)
     end
