@@ -15,15 +15,15 @@ module Userstack
     # @param use_ssl [Boolean] Use ssl or not
     # @param legacy [Boolean] Legacy response
     # @return [URI::HTTP, URI::HTTPS]
-    def self.execute(access_key, useragent, use_ssl: true, legacy: false)
-      new(access_key, useragent, use_ssl: use_ssl, legacy: legacy).send(:execute)
+    def self.execute(access_key, useragent, use_ssl, legacy)
+      new(access_key, useragent, use_ssl, legacy).send(:execute)
     end
 
     private
 
     attr_reader :access_key, :useragent, :use_ssl, :legacy
 
-    def initialize(access_key, useragent, use_ssl: true, legacy: false)
+    def initialize(access_key, useragent, use_ssl, legacy)
       @access_key = access_key.freeze
       @useragent = useragent.freeze
       @use_ssl = use_ssl

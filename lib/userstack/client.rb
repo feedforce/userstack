@@ -38,7 +38,7 @@ module Userstack
     attr_reader :access_key, :use_ssl, :legacy
 
     def request(useragent)
-      uri = Userstack::UriBuilder.execute(access_key, useragent, use_ssl: use_ssl, legacy: legacy)
+      uri = Userstack::UriBuilder.execute(access_key, useragent, use_ssl, legacy)
       Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.get(uri.to_s, 'User-Agent' => USER_AGENT)
       end
