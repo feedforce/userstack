@@ -21,6 +21,9 @@ module Userstack
       freeze
     end
 
+    USER_AGENT = 'Userstack gem/%s' % VERSION
+    private_constant :USER_AGENT
+
     attr_reader :access_key, :use_ssl, :legacy
 
     # Parse an useragent using Userstack
@@ -33,37 +36,13 @@ module Userstack
       parse_as_json(response.body)
     end
 
-    USERSTACK_API_DOMAIN = 'api.userstack.com'
-    private_constant :USERSTACK_API_DOMAIN
-
-    USER_AGENT = 'Userstack gem/%s' % VERSION
-    private_constant :USER_AGENT
-
     private
 
     def request(useragent)
-      uri = request_uri(useragent)
+      uri = Userstack::UriBuilder.execute(access_key, useragent, use_ssl: use_ssl, legacy: legacy)
       Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.get(uri.to_s, 'User-Agent' => USER_AGENT)
       end
-    end
-
-    def request_uri(useragent)
-      scheme = use_ssl ? 'https' : 'http'
-      fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
-      fqdn.dup.tap do |uri|
-        uri.path = '/detect'
-        uri.query = request_query(useragent)
-      end
-    end
-
-    def request_query(useragent)
-      query = {
-        access_key: access_key,
-        ua: CGI.escape(useragent)
-      }
-      query[:legacy] = 1 if legacy
-      query.map { |k, v| "#{k}=#{v}" }.join('&')
     end
 
     def parse_as_json(json_text)
