@@ -76,6 +76,14 @@ describe Userstack::Client do
       it 'returns normal response' do
         expect(client.parse(useragent)).to match_array expectation
       end
+
+      context 'useragent is empty' do
+        it { expect { client.parse('') }.to raise_error ArgumentError }
+      end
+
+      context 'useragent is nil' do
+        it { expect { client.parse(nil) }.to raise_error ArgumentError }
+      end
     end
 
     context 'when a server returns a broken response' do
