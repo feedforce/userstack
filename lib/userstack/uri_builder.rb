@@ -32,7 +32,6 @@ module Userstack
     end
 
     def execute
-      scheme = use_ssl ? 'https' : 'http'
       fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
       fqdn.dup.tap do |uri|
         uri.path = '/detect'
@@ -47,6 +46,10 @@ module Userstack
       }
       query[:legacy] = 1 if legacy
       query.map { |k, v| "#{k}=#{v}" }.join('&')
+    end
+
+    def scheme
+      use_ssl ? 'https' : 'http'
     end
   end
 end
