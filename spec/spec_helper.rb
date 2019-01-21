@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'userstack'
 require 'webmock/rspec'
+require 'pry'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
