@@ -33,7 +33,7 @@ module Userstack
 
     def execute
       fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
-      fqdn.dup.tap do |uri|
+      fqdn.tap do |uri|
         uri.path = '/detect'
         uri.query = query
       end
