@@ -3,7 +3,7 @@
 require 'cgi'
 
 module Userstack
-  # A class which builds uri of Userstack api
+  # A class which builds URI of Userstack api
   class UriBuilder
     USERSTACK_API_DOMAIN = 'api.userstack.com'
     private_constant :USERSTACK_API_DOMAIN
@@ -35,17 +35,17 @@ module Userstack
       fqdn = URI("#{scheme}://#{USERSTACK_API_DOMAIN}/")
       fqdn.dup.tap do |uri|
         uri.path = '/detect'
-        uri.query = request_query
+        uri.query = query
       end
     end
 
-    def request_query
-      query = {
+    def query
+      q = {
         access_key: access_key,
         ua: CGI.escape(useragent)
       }
-      query[:legacy] = 1 if legacy
-      query.map { |k, v| "#{k}=#{v}" }.join('&')
+      q[:legacy] = 1 if legacy
+      q.map { |k, v| "#{k}=#{v}" }.join('&')
     end
 
     def scheme
