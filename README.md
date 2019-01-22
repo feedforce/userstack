@@ -47,6 +47,32 @@ client = Userstack::Client.new(ACCESS_KEY, use_ssl: false)
 result = client.parse('an useragent')
 ```
 
+### Legacy response
+
+Userstack supports Useragent API response.
+
+```ruby
+client = Userstack::Client.new(ACCESS_KEY, legacy: true)
+result = client.parse('an useragent')
+```
+
+example response
+```json
+{
+  "data": {
+    "ua_type": "Desktop",
+    "os_name": "macOS 10.14 Mojave",
+    "os_version": "",
+    "browser_name": "Chrome",
+    "browser_version": "71.0.3578.98",
+    "engine_name": "WebKit/Blink",
+    "engine_version": ""
+  }
+}
+```
+
+refs. https://userstack.com/documentation#enable_legacy_format
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
