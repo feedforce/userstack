@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Userstack::UriBuilder do
-  describe '#execute' do
+  describe '.execute' do
     subject { Userstack::UriBuilder.execute(access_key, useragent, use_ssl, legacy) }
 
     let(:access_key) { 'c22b52f2b1409beb22585ae658280' }
@@ -14,7 +14,7 @@ describe Userstack::UriBuilder do
         expect(subject.host).to eq 'api.userstack.com'
       end
 
-      it 'has correct path' do
+      it 'has `/detect` path' do
         expect(subject.path).to eq '/detect'
       end
     end
