@@ -7,8 +7,8 @@ require 'userstack/version'
 Gem::Specification.new do |spec|
   spec.name          = 'userstack'
   spec.version       = Userstack::VERSION
-  spec.authors       = ['Masaki Maeda']
-  spec.email         = ['m-maeda@feedforce.jp']
+  spec.authors       = ['Feedforce Inc.']
+  spec.email         = ['technical_staff@feedforce.jp']
 
   spec.summary       = 'Ruby toolkit for working with the Userstack'
   spec.description   = 'Simple wrapper for the Userstack API https://userstack.com'
