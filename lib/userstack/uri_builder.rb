@@ -6,7 +6,6 @@ module Userstack
   # A class which builds URI of Userstack api
   class UriBuilder
     USERSTACK_API_DOMAIN = 'api.userstack.com'
-    private_constant :USERSTACK_API_DOMAIN
 
     private_class_method :new
 
