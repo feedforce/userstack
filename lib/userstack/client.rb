@@ -43,7 +43,10 @@ module Userstack
     def request(useragent)
       uri = UriBuilder.execute(access_key, useragent, use_ssl, legacy)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = uri.scheme == 'https'
+      if uri.scheme == 'https'
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      end
       http.get(uri.to_s, 'User-Agent' => USER_AGENT)
     end
 
