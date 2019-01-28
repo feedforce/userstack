@@ -28,7 +28,7 @@ describe Userstack::Client do
 
     before do
       allow(Userstack::UriBuilder).to receive(:execute).and_return(URI(request_uri))
-      stub_request(:get, request_uri).to_return(status: response_status, body: response_body)
+      stub_request(:get, request_uri).to_return(:status => response_status, :body => response_body)
     end
 
     context 'Request valid response' do
