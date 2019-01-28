@@ -40,8 +40,8 @@ module Userstack
 
     def query
       q = {
-        access_key: access_key,
-        ua: CGI.escape(useragent)
+        :access_key => access_key,
+        :ua => CGI.escape(useragent)
       }
       q[:legacy] = 1 if legacy
       q.map { |k, v| "#{k}=#{v}" }.join('&')
