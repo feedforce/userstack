@@ -2,9 +2,11 @@
 
 [![Travis Status](https://img.shields.io/travis/feedforce/userstack.svg?style=flat-square)][travisci]
 [![License](https://img.shields.io/github/license/feedforce/userstack.svg?style=flat-square)][license]
+[![Gem](https://img.shields.io/gem/v/userstack.svg?style=flat-square)][gem-link]
 
 [travisci]: https://travis-ci.org/feedforce/userstack
 [license]: https://github.com/feedforce/userstack/blob/master/LICENSE.txt
+[gem-link]: http://badge.fury.io/rb/userstack
 
 This gem provides an access to [Userstack](https://userstack.com).
 
