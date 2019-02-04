@@ -6,7 +6,7 @@
 [travisci]: https://travis-ci.org/feedforce/userstack
 [license]: https://github.com/feedforce/userstack/blob/master/LICENSE.txt
 
-This gem provides an access to [Userstack](https://userstack.com://userstack.com).
+This gem provides an access to [Userstack](https://userstack.com).
 
 ## Installation
 
